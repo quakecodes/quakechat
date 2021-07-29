@@ -1,0 +1,44 @@
+:root {
+  --background-primary: #121217;
+  --background-secondary: #292955;
+  --accent-primary: #546e96;
+}
+
+body {
+  background-color: var(--background-primary);
+  margin: 0;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+* {
+  font-family: "Montserrat";
+}
+
+h1, h2, h3, h4, p {
+  color: white;
+}
+
+.highlight {
+  color: var(--accent-primary);
+}
+
+.error {
+  color: rgb(195, 52, 52);
+}
+
+::-webkit-scrollbar {
+  width: 5px;
+}
+
+::-webkit-scrollbar-track {
+  background-color: var(--background-secondary);
+  border-radius: 6rem;
+}
+
+::-webkit-scrollbar-thumb {
+  width: 10px;
+  border-radius: 6rem;
+  background-color: var(--accent-primary);
+}
+
