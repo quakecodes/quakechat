@@ -6,7 +6,7 @@ import Button from "./components/Button"
 import { useState, useEffect, useRef } from "react"
 import io from "socket.io-client"
 
-const socket = io(`ws://${window.location.href}`)
+const socket = io(`ws://${window.location.hostname}`)
 
 const App = () => {
   const [username, setUsername] = useState<string>("")
@@ -14,14 +14,17 @@ const App = () => {
   const [inputText, setInputText] = useState("")
   const [error, setError] = useState<string>("")
 
-  const dummy = useRef<HTMLSpanElement>(document.createElement("span"));
+  const dummy = useRef<HTMLSpanElement>(document.createElement("span"))
 
   useEffect(() => {
     setInputText(localStorage.getItem("lastUsername") || "")
 
     socket.on("message", (message) => {
-      setMessages((messages) => [...(messages.length >= 49 ? messages.slice(1, 51) : messages), message])
-      dummy.current.scrollIntoView({ behavior: 'smooth' });
+      setMessages((messages) => [
+        ...(messages.length >= 49 ? messages.slice(1, 51) : messages),
+        message
+      ])
+      dummy.current.scrollIntoView({ behavior: "smooth" })
     })
   }, [])
 
@@ -61,21 +64,25 @@ const App = () => {
             Logged in as <span className="highlight">{username}</span>.
           </h2>
           <div className="main chat-container">
-              {messages.map((message, count) =>
-                message.type === "chat" ? (
-                  <ChatMessage message={message} key={count} side={message.author === username ? "right" : "left"} />
-                ) : (
-                  <div className="server-message">
-                    <h2 className="highlight">{message.content}</h2>
-                    <p>
-                      {new Date(message.sentAt).toLocaleTimeString([], {
-                        timeStyle: "short"
-                      })}
-                    </p>
-                  </div>
-                )
-              )}
-              <span ref={dummy}></span>
+            {messages.map((message, count) =>
+              message.type === "chat" ? (
+                <ChatMessage
+                  message={message}
+                  key={count}
+                  side={message.author === username ? "right" : "left"}
+                />
+              ) : (
+                <div className="server-message">
+                  <h2 className="highlight">{message.content}</h2>
+                  <p>
+                    {new Date(message.sentAt).toLocaleTimeString([], {
+                      timeStyle: "short"
+                    })}
+                  </p>
+                </div>
+              )
+            )}
+            <span ref={dummy}></span>
           </div>
           <div className="message-input-container">
             <input
