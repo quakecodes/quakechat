@@ -4,7 +4,7 @@ const filter = require("leo-profanity")
 
 const app = express()
 const server = http.createServer(app)
-const port = 80
+const port = 5000
 
 app.use(express.static("client/build"))
 
@@ -109,4 +109,4 @@ io.on("connection", (socket) => {
   })
 })
 
-server.listen(80, () => console.log(`Server is running on port ${port}.`))
+server.listen(port, () => console.log(`Server is running on port ${port}.`))
