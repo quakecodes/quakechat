@@ -6,7 +6,7 @@ import Button from "./components/Button"
 import { useState, useEffect, useRef } from "react"
 import io from "socket.io-client"
 
-const socket = io(`ws://${window.location.hostname}`)
+const socket = io(`ws://${window.location.hostname}:5000`)
 
 const App = () => {
   const [username, setUsername] = useState<string>("")
