@@ -15,7 +15,7 @@ const io = require("socket.io")(server, {
 var users = []
 var messageCache = []
 
-filter.remove(["butt"])
+filter.remove(["butt", "sucks"])
 filter.add(["retard", "retarded"])
 
 app.get("/", (req, res) => {
@@ -47,6 +47,7 @@ io.on("connection", (socket) => {
         status: "error",
         message: "That username is not allowed."
       })
+      return
     }
 
     socket.emit("username", {
